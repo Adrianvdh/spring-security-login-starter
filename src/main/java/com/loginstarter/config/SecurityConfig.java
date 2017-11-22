@@ -1,7 +1,7 @@
 package com.loginstarter.config;
 
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -16,13 +16,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .anyRequest().authenticated()
             .and()
-                .formLogin()
-                .and()
-                .logout();
+                .httpBasic();
     }
 
+
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("admin").password("password").roles("ADMIN");
     }
 }
