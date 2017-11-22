@@ -16,12 +16,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .anyRequest().authenticated()
             .and()
+                .rememberMe().rememberMeCookieName("remember-me")
+            .and()
                 .httpBasic();
     }
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //auth.
         auth.inMemoryAuthentication()
                 .withUser("admin").password("password").roles("ADMIN");
     }
