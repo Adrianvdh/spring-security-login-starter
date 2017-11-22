@@ -1,6 +1,6 @@
 package com.loginstarter.controller;
 
-import com.loginstarter.user.model.User;
+import com.loginstarter.user.model.UserVM;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping
-    public User protectedPage() {
-        return new User("adrian", "adrian@zailab.com", "1123");
+    public UserVM protectedPage() {
+        return new UserVM("adrian", "adrian@zailab.com", "1123");
     }
 }

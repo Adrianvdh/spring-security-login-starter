@@ -1,21 +1,42 @@
 package com.loginstarter.user;
 
-import com.loginstarter.user.model.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.loginstarter.model.User;
+import com.loginstarter.user.model.UserVM;
+import com.loginstarter.user.repository.UserRepository;
+import com.loginstarter.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/user/registration")
+@RequestMapping("/user")
 public class UserResource {
 
+    private final UserRepository userRepository;
+    private final UserService userService;
 
+    @Autowired
+    public UserResource(UserRepository userRepository, UserService userService) {
+        this.userRepository = userRepository;
+        this.userService = userService;
+    }
 
-    @PostMapping
-    public void registerUser(@Valid User user) {
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerUser(@Valid UserVM userVM) {
 
+        userRepository.findOneByEmail(userVM.getEmail())
+                .ifPresent(user -> { throw new RuntimeException("Email address already taken!"); });
+
+        userService.registerUser(userVM);
+    }
+
+    @GetMapping("/all")
+    public List<User> getAllRegisteredUsers() {
+        return userRepository.findAll();
     }
 
 }
