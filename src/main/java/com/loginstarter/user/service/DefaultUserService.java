@@ -24,7 +24,7 @@ public class DefaultUserService implements UserService {
     public User registerUser(UserVM userVM) {
         User user = new User();
         user.setFirstName(userVM.getFirstName());
-        user.setUsername(userVM.getEmail());
+        user.setUsername(userVM.getUserName());
         user.setEmail(userVM.getEmail());
 
         String encodedPassword = passwordEncoder.encode(userVM.getPassword());
