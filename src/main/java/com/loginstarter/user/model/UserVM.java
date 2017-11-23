@@ -12,6 +12,8 @@ public class UserVM {
 
     private String firstName;
 
+    private String userName;
+
     @Email
     private String email;
 
