@@ -29,6 +29,6 @@ public class DefaultUserDetailsService implements UserDetailsService {
                     username,
                     user.getPassword(),
                     Collections.singleton(() -> "ROLE_ADMIN"));
-        }).orElseThrow(() -> new RuntimeException("User " + username + " was nt found!"));
+        }).orElseThrow(() -> new RuntimeException("User " + username + " was not found!"));
     }
 }
