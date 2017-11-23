@@ -1,7 +1,6 @@
 package com.loginstarter.user.repository;
 
 import com.loginstarter.model.User;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import java.util.LinkedList;
